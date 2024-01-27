@@ -6,8 +6,8 @@ function App() {
 
   const [ city, setCity ] = useState<string>();
   const [ location, setLocation ] = useState({
-    latitude: 0,
-    longitude:0,
+    latitude: 25.3176,
+    longitude:82.9739,
     display_name: "",
   });
 
@@ -18,7 +18,7 @@ function App() {
   }, []);
  
 //reverse geocoding search
-  function getCurrentCityName(position : any) {      
+  function getCurrentCityName(position: GeolocationPosition) {      
    
     const url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='
     + position.coords.latitude + '&lon='  
@@ -37,9 +37,9 @@ function App() {
     }
 
   //search for city coordinated based on form data
-  function submitHandler(e:any) {
+  function submitHandler(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault(); 
-    let url = `https://nominatim.openstreetmap.org/search?city='${city}'&format=json&limit=1`;
+    const url = `https://nominatim.openstreetmap.org/search?city='${city}'&format=json&limit=1`;
    
     fetch(url, {
       method: "GET",
@@ -59,7 +59,7 @@ function App() {
       }).catch(() => alert("Please Check your input"));
   }      
      
-  const handleChange = (event:any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value);
   };
 
@@ -78,6 +78,7 @@ function App() {
             value={city}
             onChange={ handleChange }
             id="city"
+            style={{display:"absolute", left:"10px"}}
           />        
 
           <button onClick={ ( e )=> submitHandler( e ) }>Search</button>

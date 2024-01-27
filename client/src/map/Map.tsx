@@ -1,6 +1,6 @@
 import { TileLayer , MapContainer , Marker , Popup } from "react-leaflet"
 import "leaflet/dist/leaflet.css";
-import markerIconURL from '../assets/marker-icon.png';
+import markerIconURL from '../assets/pointer.svg';
 import L from 'leaflet'
 
 interface CurrentLocation {
@@ -10,12 +10,12 @@ interface CurrentLocation {
 }
 
 interface props {
-  currentLocation: CurrentLocation
+  location: CurrentLocation
 }
 
 export default function Map( { location }: props) {
 
-  const currentCity: Location = location;
+  const currentCity: CurrentLocation = location;
   const markerIcon = new L.Icon({
     iconUrl: markerIconURL,
     iconSize: [25, 35],
